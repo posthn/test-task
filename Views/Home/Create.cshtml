@@ -1,0 +1,56 @@
+@model Person
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Создание";
+}
+
+<form method="post" asp-action="Create">
+    <input hidden asp-for="Id" value="@(Model == null ? 0 : Model.Id)" />
+    <div class="mb-3">
+        <label class="form-label" asp-for="FirstName">Имя</label>
+        <input class="form-control" asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="LastName">Фамилия</label>
+        <input class="form-control" asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Gender">Пол</label>
+        <select class="form-control" asp-for="Gender">
+            <option disabled selected>Выберите пол...</option>
+            <option value="Мужской">Мужской</option>
+            <option value="Женский">Женский</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="BirthDate">Дата рождения</label>
+        <input class="form-control" asp-for="BirthDate" type="date" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Team.Name">Наиенование команды</label>
+        <input hidden asp-for="Team.Id" value="@(Model == null ? 0 : Model.Team.Id)" />
+        <input list="teams" class="form-control" asp-for="Team.Name" />
+        <datalist id="teams">
+            @foreach (var team in ViewBag.Teams) {
+                <option value=@team.Name>@team.Name</option>
+            }
+        </datalist>
+        <span asp-validation-for="Team.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Country">Страна</label>
+        <select class="form-control" asp-for="Country">
+            <option disabled selected>Выберите страну...</option>
+            <option value="Россия">Россия</option>
+            <option value="США">США</option>
+            <option value="Италия">Италия</option>
+        </select>
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">@(Model == null ? "Создать" : "Изменить")</button>
+    <a class="btn btn-secondary" asp-action="List">Список</a>
+</form>

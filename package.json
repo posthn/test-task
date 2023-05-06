@@ -1,0 +1,7 @@
+{
+    "name": "project01",
+    "private": true,
+    "dependencies": {
+        "bootstrap": "5.2.0"
+    }
+}

@@ -1,0 +1,31 @@
+@model IEnumerable<Person>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Список";
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Пол</th>
+        <th>Дата рождения</th>
+        <th>Команда</th>
+        <th>Страна</th>
+        <th></th>
+    </tr>
+    @foreach(var person in Model) {
+        <tr>
+            <td>@person.FirstName</td>
+            <td>@person.LastName</td>
+            <td>@person.Gender</td>
+            <td>@person.BirthDate</td>
+            <td>@person.Team.Name</td>
+            <td>@person.Country</td>
+            <td>
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-personId="@person.Id">Изменить</a>
+            </td>
+        </tr>
+    }
+</table>
+<a class="btn btn-primary" asp-action="Create">Добавить</a>
